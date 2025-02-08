@@ -9,7 +9,9 @@ namespace matrix {
     Engine engine;
 
     enum simulation {
-        particle
+        particle,
+        atomic,
+        gol
     };
 
     simulation state;
@@ -35,12 +37,16 @@ namespace matrix {
         for(int y = 0; y < 8; y++)
         for(int x = 0; x < 24; x++)
             pixel_map[pixel++] = 191 - (x * 8) - y;
+
+        engine.meta.frame = 0;
     
     }
 
     void loop () {
         switch(state) {
             case particle: quantum_particle(&engine); break;
+            case atomic:    quantum_particles(&engine); break;
+            case gol: GameOfLife(&engine); break;
             default: Serial.println("This isn't a display mode!");
         }
         

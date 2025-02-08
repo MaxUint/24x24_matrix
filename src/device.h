@@ -1,6 +1,7 @@
 #pragma once
 #include <Arduino.h>
 #include <esp_task_wdt.h>
+#include "constants.h"
 
 namespace device {
 
@@ -36,6 +37,12 @@ namespace device {
     esp_task_wdt_add(NULL);
 
     pinMode(LED_BUILTIN, OUTPUT);
+
+    pinMode(SOUND_PIN_SINK, OUTPUT); digitalWrite(SOUND_PIN_SINK, LOW);
+    pinMode(SOUND_PIN_SOURCE, OUTPUT);
+    tone(SOUND_PIN_SOURCE, 300, 20);
+    tone(SOUND_PIN_SOURCE, 500, 20);
+    tone(SOUND_PIN_SOURCE, 900, 20);
 
     Serial.print("TX:   ");   Serial.println(TX);
     Serial.print("RX:   ");   Serial.println(RX);
